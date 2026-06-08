@@ -269,6 +269,21 @@
     display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center;font-size:13px;color:var(--muted-2)}
   @media (max-width:900px){.foot-inner{grid-template-columns:1fr 1fr}}
   @media (max-width:560px){.foot-inner{grid-template-columns:1fr}}
+
+  /* ── privacy overlay ── */
+  #privacy-page{display:none;position:fixed;inset:0;z-index:40;overflow-y:auto;
+    background:var(--sea-900);padding-top:72px}
+  #privacy-page.active{display:block}
+  .prv-wrap{max-width:860px;margin:0 auto;padding:clamp(48px,8vw,96px) clamp(20px,5vw,72px) clamp(64px,10vw,120px)}
+  .prv-section{display:flex;flex-direction:column;gap:40px;color:var(--muted);line-height:1.75;font-size:1.02rem}
+  .prv-h{font-family:var(--display);font-weight:600;font-size:1.2rem;text-transform:uppercase;
+    letter-spacing:.05em;color:var(--ink);margin-bottom:12px}
+  .prv-card{padding:28px 32px;border-radius:16px;border:1px solid var(--line);
+    background:linear-gradient(180deg,rgba(186,224,245,.07),rgba(186,224,245,.02))}
+  .prv-list{list-style:none;display:flex;flex-direction:column;gap:10px}
+  .prv-list li{display:flex;gap:12px}
+  .prv-list .ic{color:var(--teal);flex:0 0 auto;margin-top:5px}
+  .prv-list .ic2{color:var(--violet);flex:0 0 auto;margin-top:5px}
 </style>
 </head>
 <body>
@@ -556,6 +571,7 @@
   </div>
 </section>
 
+
 <footer class="foot">
   <div class="foot-inner">
     <div>
@@ -582,6 +598,7 @@
         <li><a href="#clients">Clients</a></li>
         <li><a href="#csr">CSR</a></li>
         <li><a href="#contact">Contact</a></li>
+        <li><a href="#privacy" onclick="openPrivacy();return false;">Privacy Policy</a></li>
       </ul>
     </div>
     <div>
@@ -593,7 +610,7 @@
     </div>
   </div>
   <div class="foot-bar">
-    <span>© 2026 Aurora Energy Services — All rights reserved.</span>
+    <span>© 2026 Aurora Energy Services — All rights reserved. · <a href="#privacy" onclick="openPrivacy();return false;" style="color:var(--muted-2);text-decoration:none">Privacy Policy</a></span>
     <span>Gulf of Guinea Basin · West Africa</span>
   </div>
 </footer>
@@ -650,7 +667,104 @@
           .finally(function(){sb.disabled=false;});
       });
     }
+
+    // privacy overlay
+    function openPrivacy(){
+      document.getElementById('privacy-page').classList.add('active');
+      document.body.style.overflow='hidden';
+      window.scrollTo(0,0);
+    }
+    function closePrivacy(){
+      document.getElementById('privacy-page').classList.remove('active');
+      document.body.style.overflow='';
+    }
+    // close on Escape
+    document.addEventListener('keydown',function(e){if(e.key==='Escape')closePrivacy();});
   })();
 </script>
+
+<!-- ── PRIVACY POLICY PAGE (single-page overlay) ── -->
+<div id="privacy-page" role="region" aria-label="Privacy Policy">
+  <div class="prv-wrap">
+    <div class="sp-eyebrow" style="margin-bottom:24px"><span class="bar"></span><span class="lbl">Legal</span></div>
+    <h1 class="sp-h2" style="font-size:clamp(2rem,4vw,3rem);margin-bottom:8px">Privacy Policy</h1>
+    <p style="font-size:13px;color:var(--muted-2);margin-bottom:48px">Last updated: June 2026</p>
+    <div class="prv-section">
+
+      <div>
+        <p class="prv-h">1. Introduction</p>
+        <p>Aurora Energy Services Limited ("Aurora", "we", "our", or "us") is committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard information when you visit our website or engage with our marine and subsea services across the Gulf of Guinea Basin.</p>
+      </div>
+
+      <div>
+        <p class="prv-h">2. Information We Collect</p>
+        <p style="margin-bottom:14px">We may collect the following categories of personal information:</p>
+        <ul class="prv-list">
+          <li><span class="ic">&#x2714;</span><span><strong style="color:var(--ink)">Contact information</strong> — name, email address, phone number, and company name provided through our contact form or by email.</span></li>
+          <li><span class="ic">&#x2714;</span><span><strong style="color:var(--ink)">Usage data</strong> — information your browser sends when you visit our site, including IP address, browser type, pages visited, and time spent on each page.</span></li>
+          <li><span class="ic">&#x2714;</span><span><strong style="color:var(--ink)">Communications</strong> — records of correspondence if you contact us directly regarding our services or partnership opportunities.</span></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="prv-h">3. How We Use Your Information</p>
+        <p style="margin-bottom:14px">Aurora uses the information we collect to:</p>
+        <ul class="prv-list">
+          <li><span class="ic2">&#x2022;</span><span>Respond to enquiries and provide requested services or proposals.</span></li>
+          <li><span class="ic2">&#x2022;</span><span>Maintain and improve the functionality and security of our website.</span></li>
+          <li><span class="ic2">&#x2022;</span><span>Comply with applicable laws, regulations, and industry standards governing offshore and maritime operations.</span></li>
+          <li><span class="ic2">&#x2022;</span><span>Send relevant communications about our services where you have given consent or a legitimate business interest exists.</span></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="prv-h">4. Sharing of Information</p>
+        <p>We do not sell, trade, or rent your personal information to third parties. We may share information with trusted service providers who assist us in operating our website or conducting our business — such as form processing services — under strict confidentiality agreements. We may also disclose information where required by law or to protect the rights, property, or safety of Aurora Energy Services, our clients, or the public.</p>
+      </div>
+
+      <div>
+        <p class="prv-h">5. Data Retention</p>
+        <p>We retain personal information only for as long as necessary to fulfil the purposes outlined in this policy, or as required by applicable law. Contact enquiries are typically retained for up to 24 months unless an ongoing business relationship is established.</p>
+      </div>
+
+      <div>
+        <p class="prv-h">6. Cookies</p>
+        <p>Our website may use essential cookies to ensure basic functionality. We do not use tracking or advertising cookies. You may configure your browser to refuse cookies; however, some features of the site may not function correctly as a result.</p>
+      </div>
+
+      <div>
+        <p class="prv-h">7. Your Rights</p>
+        <p>Depending on your jurisdiction, you may have the right to access, correct, delete, or restrict the processing of your personal data. To exercise any of these rights, please contact us using the details below. We will respond within a reasonable timeframe in accordance with applicable data protection laws.</p>
+      </div>
+
+      <div>
+        <p class="prv-h">8. Security</p>
+        <p>We implement appropriate technical and organisational measures to protect your personal information against unauthorised access, alteration, disclosure, or destruction. However, no method of transmission over the internet is 100% secure, and we cannot guarantee absolute security.</p>
+      </div>
+
+      <div>
+        <p class="prv-h">9. Changes to This Policy</p>
+        <p>We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated revision date. We encourage you to review this policy periodically.</p>
+      </div>
+
+      <div class="prv-card">
+        <p class="prv-h">10. Contact Us</p>
+        <p style="margin-bottom:16px">If you have questions or concerns about this Privacy Policy or our data practices, please contact us:</p>
+        <p style="color:var(--ink)"><strong>Aurora Energy Services Limited</strong><br>
+        Gulf of Guinea Basin &middot; West Africa<br>
+        <a href="mailto:info@aurora-es.com" style="color:var(--teal);text-decoration:none">info@aurora-es.com</a></p>
+      </div>
+
+      <div style="padding-top:8px">
+        <a href="#" onclick="closePrivacy();return false;" class="btn btn-ghost" style="display:inline-flex">
+          &#8592;&nbsp; Back to main site
+        </a>
+      </div>
+
+    </div>
+  </div>
+</div>
 </body>
 </html>
+
+</body>
