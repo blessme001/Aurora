@@ -284,6 +284,52 @@
   .prv-list li{display:flex;gap:12px}
   .prv-list .ic{color:var(--teal);flex:0 0 auto;margin-top:5px}
   .prv-list .ic2{color:var(--violet);flex:0 0 auto;margin-top:5px}
+
+  /* ── services slideshow ── */
+  .sv-section{position:relative;overflow:hidden;background:var(--sea-900)}
+  .sv-section::after{content:"";position:absolute;top:-240px;right:-240px;width:680px;height:680px;border-radius:50%;
+    background:radial-gradient(circle,var(--sv-soft,rgba(55,214,192,.10)),transparent 62%);
+    filter:blur(28px);pointer-events:none;transition:background .9s}
+  .sv-header-wrap{max-width:1320px;margin:0 auto;
+    padding:clamp(56px,8vw,96px) clamp(20px,5vw,72px) 0;
+    display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px}
+  .sv-title{font-family:var(--display);font-weight:700;text-transform:uppercase;font-size:clamp(2rem,3.8vw,3rem);line-height:.95}
+  .sv-controls{display:flex;align-items:center;gap:12px}
+  .sv-counter{font-family:var(--display);font-weight:600;letter-spacing:.12em;font-size:13px;color:var(--muted-2);min-width:52px;text-align:right}
+  .sv-btn{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);
+    background:rgba(186,224,245,.06);backdrop-filter:blur(6px);cursor:pointer;
+    display:grid;place-items:center;color:var(--ink);
+    transition:border-color .2s,background .2s,transform .15s}
+  .sv-btn:hover{border-color:rgba(186,224,245,.36);background:rgba(186,224,245,.14);transform:scale(1.08)}
+  .sv-btn svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+  .sv-progress-bar{height:3px;background:rgba(186,224,245,.08);margin-top:clamp(28px,3.5vw,40px);position:relative;overflow:hidden}
+  .sv-progress-fill{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--sv-acc,var(--teal));transition:background .9s}
+  .sv-track{position:relative;overflow:hidden}
+  .sv-slide{display:grid;grid-template-columns:1fr 1.04fr;gap:clamp(34px,5vw,76px);align-items:center;
+    padding:clamp(40px,5vw,72px) clamp(20px,5vw,72px) clamp(56px,7vw,96px);
+    max-width:1320px;margin:0 auto;
+    position:absolute;inset:0;opacity:0;transform:translateX(52px);
+    transition:opacity .6s cubic-bezier(.22,.7,.2,1),transform .6s cubic-bezier(.22,.7,.2,1);
+    pointer-events:none}
+  .sv-slide.alt{grid-template-columns:1.04fr 1fr}
+  .sv-slide.alt .sv-media{order:-1}
+  .sv-slide.active{position:relative;inset:auto;opacity:1;transform:none;pointer-events:auto}
+  .sv-slide.out-left{opacity:0;transform:translateX(-52px)}
+  .sv-slide.in-right{opacity:0;transform:translateX(52px)}
+  .sv-slide.in-left{opacity:0;transform:translateX(-52px)}
+  .sv-slide.out-right{opacity:0;transform:translateX(52px)}
+  .sv-bg{position:absolute;inset:0;z-index:0;transition:background .9s}
+  .sv-slide>*{position:relative;z-index:1}
+  .sv-dots{display:flex;gap:8px;justify-content:center;align-items:center;
+    padding:22px clamp(20px,5vw,72px) clamp(36px,5vw,52px)}
+  .sv-dot{width:8px;height:8px;border-radius:999px;background:var(--line);
+    border:none;padding:0;cursor:pointer;transition:background .3s,width .35s cubic-bezier(.22,.7,.2,1)}
+  .sv-dot.active{background:var(--sv-acc,var(--teal));width:26px}
+  @media(max-width:900px){
+    .sv-slide{grid-template-columns:1fr!important}
+    .sv-slide .sv-media,.sv-slide.alt .sv-media{order:-1}
+  }
+
 </style>
 </head>
 <body>
@@ -342,131 +388,6 @@
   </div>
 </section>
 
-<section class="spotlight acc-teal" id="services">
-  <div class="sp-inner">
-    <div class="sp-copy">
-      <div class="sp-eyebrow sp-reveal"><span class="bar"></span><span class="lbl">Service spotlight</span><span class="idx">01 / 05</span></div>
-      <h2 class="sp-h2 sp-reveal s2">Engineering &amp;<br>Project Management</h2>
-      <p class="sp-lead sp-reveal s2">Comprehensive engineering and project management, onshore and offshore. Aurora covers every phase of the project lifecycle — from planning and execution through installation, completions, commissioning, and startup — plus responsible plug‑and‑abandonment and skilled manpower tailored to each project.</p>
-      <ul class="sp-list sp-reveal s3">
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Planning, execution &amp; installation</li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Completions, commissioning &amp; startup</li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Plug &amp; abandonment (decommissioning)</li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Skilled manpower supply</li>
-      </ul>
-      <a href="#contact" class="btn btn-ghost sp-reveal s3">Learn more
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </div>
-    <div class="sp-media sp-reveal s2">
-      <div class="sp-frame"><img src="https://images.unsplash.com/photo-1581092583537-20d51b4b4f1b?fm=jpg&fit=crop&auto=format&q=76&w=1000" alt="An Aurora engineer reviewing project documents at an offshore workstation"></div>
-      <div class="sp-badge">
-        <span class="bi"><svg viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="1.5"/><path d="M11.4 5.8 6.5 19.5"/><path d="M12.6 5.8 17.5 19.5"/><path d="M8.7 14.6a5 5 0 0 0 6.6 0"/></svg></span>
-        <span><span class="bt">Full lifecycle delivery</span><span class="bd">Onshore &amp; offshore</span></span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="spotlight alt acc-violet" id="marine">
-  <div class="sp-inner">
-    <div class="sp-media sp-reveal s2">
-      <div class="sp-frame"><img src="https://images.unsplash.com/photo-1559825481-12a05cc00344?fm=jpg&fit=crop&auto=format&q=76&w=1000" alt="An Aurora construction-support vessel carrying a subsea module"></div>
-      <div class="sp-badge">
-        <span class="bi"><svg viewBox="0 0 24 24"><path d="M12 3v18M12 7a4 4 0 100 8 4 4 0 000-8z"/><path d="M5 21c2-2 3-3 7-3s5 1 7 3"/></svg></span>
-        <span><span class="bt">Subsea operations</span><span class="bd">ROV · diving · intervention</span></span>
-      </div>
-    </div>
-    <div class="sp-copy">
-      <div class="sp-eyebrow sp-reveal"><span class="bar"></span><span class="lbl">Service spotlight</span><span class="idx">02 / 05</span></div>
-      <h2 class="sp-h2 sp-reveal s2">Marine &amp;<br>Subsea Solutions</h2>
-      <p class="sp-lead sp-reveal s2">Comprehensive marine and subsea solutions tailored to each client. Advanced ROV services deliver precise underwater inspection and intervention with high efficiency and safety in demanding environments, while air and saturation diving expertise handles the complex subsea tasks that keep infrastructure performing.</p>
-      <ul class="sp-list sp-reveal s3">
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Advanced ROV services</li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Air &amp; saturation diving</li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Subsea infrastructure maintenance</li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Underwater inspection &amp; intervention</li>
-      </ul>
-      <a href="#contact" class="btn btn-ghost sp-reveal s3">Learn more
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </div>
-  </div>
-</section>
-
-<section class="spotlight acc-amber" id="integrity">
-  <div class="sp-inner">
-    <div class="sp-copy">
-      <div class="sp-eyebrow sp-reveal"><span class="bar"></span><span class="lbl">Service spotlight</span><span class="idx">03 / 05</span></div>
-      <h2 class="sp-h2 sp-reveal s2">Asset Integrity &amp;<br>Risk Management</h2>
-      <p class="sp-lead sp-reveal s2">Subsea construction and maintenance delivered by certified personnel. From structure repair and monitoring to CP/CD and flooded‑member surveys, leak investigation, and FPSO hull and turret inspection, Aurora safeguards the integrity and longevity of subsea infrastructure to the highest standards.</p>
-      <ul class="sp-list sp-reveal s3">
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Structure repair &amp; monitoring</li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>CP/CD &amp; flooded‑member surveys</li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>FPSO hull &amp; turret inspection</li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Leak investigation &amp; remediation</li>
-      </ul>
-      <a href="#contact" class="btn btn-ghost sp-reveal s3">Learn more
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </div>
-    <div class="sp-media sp-reveal s2">
-      <div class="sp-frame"><img src="https://images.unsplash.com/photo-1681812508281-7589b75b2e46?fm=jpg&fit=crop&auto=format&q=76&w=1000" alt="Aurora crew working on subsea equipment on an offshore deck"></div>
-      <div class="sp-badge">
-        <span class="bi"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9.5 12l2 2 3.5-4"/></svg></span>
-        <span><span class="bt">Integrity assured</span><span class="bd">Certified personnel</span></span>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="spotlight alt acc-teal" id="construction">
-  <div class="sp-inner">
-    <div class="sp-media sp-reveal s2">
-      <div class="sp-frame"><img src="https://images.unsplash.com/photo-1758902064778-c5c68c7e8f82?fm=jpg&fit=crop&auto=format&q=76&w=1000" alt="Subsea construction equipment and winch on an offshore vessel deck"></div>
-      <div class="sp-badge">
-        <span class="bi"><svg viewBox="0 0 24 24"><path d="M3 18a9 9 0 0 1 18 0"/><path d="M2 18h20"/><path d="M9 8V5h6v3"/></svg></span>
-        <span><span class="bt">Built &amp; maintained</span><span class="bd">Proficiency‑certified crews</span></span>
-      </div>
-    </div>
-    <div class="sp-copy">
-      <div class="sp-eyebrow sp-reveal"><span class="bar"></span><span class="lbl">Service spotlight</span><span class="idx">04 / 05</span></div>
-      <h2 class="sp-h2 sp-reveal s2">Subsea Construction<br>&amp; Maintenance</h2>
-      <p class="sp-lead sp-reveal s2">A full range of subsea construction and maintenance from proficiency‑certified personnel — component change‑outs, mid‑water arch inspection, FMD surveys, FPSO hull and turret inspection, and anchor‑chain inspection that keep subsea infrastructure built and maintained to the highest standards.</p>
-      <ul class="sp-list sp-reveal s3">
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Subsea component change‑out</li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Mid‑water arch inspection</li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Anchor‑chain inspection &amp; measurement</li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Platform &amp; pipeline inspection</li>
-      </ul>
-      <a href="#contact" class="btn btn-ghost sp-reveal s3">Learn more
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </div>
-  </div>
-</section>
-
-<section class="spotlight acc-violet" id="port">
-  <div class="sp-inner">
-    <div class="sp-copy">
-      <div class="sp-eyebrow sp-reveal"><span class="bar"></span><span class="lbl">Service spotlight</span><span class="idx">05 / 05</span></div>
-      <h2 class="sp-h2 sp-reveal s2">Port Management<br>Services</h2>
-      <p class="sp-lead sp-reveal s2">Safe, efficient maritime operations — Vessel Traffic Services, piloting with tugs and AHTS vessels, buoy and navigational‑system installation and maintenance, bathymetric surveys, and dredging, all backed by marine safety solutions that keep every activity compliant with regulations.</p>
-      <ul class="sp-list sp-reveal s3">
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Vessel Traffic Services (VTS)</li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Piloting with tugs &amp; AHTS</li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Buoy &amp; navigation systems</li>
-        <li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Bathymetric surveys &amp; dredging</li>
-      </ul>
-      <a href="#contact" class="btn btn-ghost sp-reveal s3">Learn more
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </div>
-    <div class="sp-media sp-reveal s2">
-      <div class="sp-frame"><img src="https://images.unsplash.com/photo-1605676103133-df5f92882cae?fm=jpg&fit=crop&auto=format&q=76&w=1000" alt="A harbour tug under way, used for piloting and port operations"></div>
-      <div class="sp-badge">
-        <span class="bi"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M12 7v13"/><path d="M5 12a7 7 0 0 0 14 0"/><path d="M5 12H3m18 0h-2"/></svg></span>
-        <span><span class="bt">Safe port operations</span><span class="bd">VTS · piloting · dredging</span></span>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="about" id="about">
   <div class="about-inner">
     <div class="sp-media sp-reveal s2">
@@ -482,6 +403,114 @@
       </div>
     </div>
   </div>
+</section>
+
+
+<section class="sv-section" id="services">
+  <div class="sv-header-wrap">
+    <div>
+      <div class="sp-eyebrow sp-reveal" style="margin-bottom:14px"><span class="bar"></span><span class="lbl">Our services</span></div>
+      <h2 class="sv-title sp-reveal s2">What We Do</h2>
+    </div>
+    <div class="sv-controls">
+      <span class="sv-counter" id="sv-counter">01 / 05</span>
+      <button class="sv-btn" id="sv-prev" aria-label="Previous service"><svg viewBox="0 0 24 24"><path d="M15 18l-6-6 6-6"/></svg></button>
+      <button class="sv-btn" id="sv-next" aria-label="Next service"><svg viewBox="0 0 24 24"><path d="M9 18l6-6-6-6"/></svg></button>
+    </div>
+  </div>
+  <div class="sv-progress-bar"><div class="sv-progress-fill" id="sv-fill"></div></div>
+  <div class="sv-track" id="sv-track">
+    <div class="sv-slide active" data-acc="var(--teal)" data-soft="rgba(55,214,192,.10)" id="slide-services">
+    <div class="sv-bg" style="background:linear-gradient(135deg,rgba(4,28,46,.95),rgba(5,42,60,.88))"></div>
+    <div class="sp-copy">
+      <div class="sp-eyebrow sp-reveal"><span class="bar"></span><span class="lbl">Service spotlight</span><span class="idx">01 / 05</span></div>
+      <h2 class="sp-h2 sp-reveal s2">Engineering &amp;<br>Project Management</h2>
+      <p class="sp-lead sp-reveal s2">Comprehensive engineering and project management, onshore and offshore. Aurora covers every phase of the project lifecycle — from planning and execution through installation, completions, commissioning, and startup — plus responsible plug-and-abandonment and skilled manpower tailored to each project.</p>
+      <ul class="sp-list sp-reveal s3"><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Planning, execution &amp; installation</li><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Completions, commissioning &amp; startup</li><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Plug &amp; abandonment (decommissioning)</li><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Skilled manpower supply</li></ul>
+      <a href="#contact" class="btn btn-ghost sp-reveal s3">Learn more
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div><div class="sv-media sp-reveal s2">
+      <div class="sp-frame"><img src="https://images.unsplash.com/photo-1581092583537-20d51b4b4f1b?fm=jpg&fit=crop&auto=format&q=76&w=1000" alt="Aurora engineer reviewing project documents at an offshore workstation" loading="lazy"></div>
+      <div class="sp-badge" style="left:-16px;bottom:-18px">
+        <span class="bi"><svg viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="1.5"/><path d="M11.4 5.8 6.5 19.5"/><path d="M12.6 5.8 17.5 19.5"/><path d="M8.7 14.6a5 5 0 0 0 6.6 0"/></svg></span>
+        <span><span class="bt">Full lifecycle delivery</span><span class="bd">Onshore &amp; offshore</span></span>
+      </div>
+    </div>
+  </div>
+<div class="sv-slide alt" data-acc="var(--violet)" data-soft="rgba(143,160,255,.10)" id="slide-marine">
+    <div class="sv-bg" style="background:linear-gradient(135deg,rgba(6,36,68,.95),rgba(4,24,56,.88))"></div>
+    <div class="sv-media sp-reveal s2">
+      <div class="sp-frame"><img src="https://images.unsplash.com/photo-1559825481-12a05cc00344?fm=jpg&fit=crop&auto=format&q=76&w=1000" alt="Construction-support vessel carrying a subsea module" loading="lazy"></div>
+      <div class="sp-badge" style="right:-16px;bottom:-18px">
+        <span class="bi"><svg viewBox="0 0 24 24"><path d="M12 3v18M12 7a4 4 0 100 8 4 4 0 000-8z"/><path d="M5 21c2-2 3-3 7-3s5 1 7 3"/></svg></span>
+        <span><span class="bt">Subsea operations</span><span class="bd">ROV · diving · intervention</span></span>
+      </div>
+    </div><div class="sp-copy">
+      <div class="sp-eyebrow sp-reveal"><span class="bar"></span><span class="lbl">Service spotlight</span><span class="idx">02 / 05</span></div>
+      <h2 class="sp-h2 sp-reveal s2">Marine &amp;<br>Subsea Solutions</h2>
+      <p class="sp-lead sp-reveal s2">Comprehensive marine and subsea solutions tailored to each client. Advanced ROV services deliver precise underwater inspection and intervention, while air and saturation diving expertise handles the complex subsea tasks that keep infrastructure performing at its best.</p>
+      <ul class="sp-list sp-reveal s3"><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Advanced ROV services</li><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Air &amp; saturation diving</li><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Subsea infrastructure maintenance</li><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Underwater inspection &amp; intervention</li></ul>
+      <a href="#contact" class="btn btn-ghost sp-reveal s3">Learn more
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+<div class="sv-slide" data-acc="var(--amber)" data-soft="rgba(255,179,92,.10)" id="slide-integrity">
+    <div class="sv-bg" style="background:linear-gradient(135deg,rgba(4,30,48,.95),rgba(8,44,60,.88))"></div>
+    <div class="sp-copy">
+      <div class="sp-eyebrow sp-reveal"><span class="bar"></span><span class="lbl">Service spotlight</span><span class="idx">03 / 05</span></div>
+      <h2 class="sp-h2 sp-reveal s2">Asset Integrity &amp;<br>Risk Management</h2>
+      <p class="sp-lead sp-reveal s2">Subsea construction and maintenance delivered by certified personnel. From structure repair and monitoring to CP/CD and flooded-member surveys, leak investigation, and FPSO hull and turret inspection — Aurora safeguards the integrity and longevity of your subsea infrastructure.</p>
+      <ul class="sp-list sp-reveal s3"><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Structure repair &amp; monitoring</li><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>CP/CD &amp; flooded-member surveys</li><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>FPSO hull &amp; turret inspection</li><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Leak investigation &amp; remediation</li></ul>
+      <a href="#contact" class="btn btn-ghost sp-reveal s3">Learn more
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div><div class="sv-media sp-reveal s2">
+      <div class="sp-frame"><img src="https://images.unsplash.com/photo-1681812508281-7589b75b2e46?fm=jpg&fit=crop&auto=format&q=76&w=1000" alt="Aurora crew working on subsea equipment on an offshore deck" loading="lazy"></div>
+      <div class="sp-badge" style="left:-16px;bottom:-18px">
+        <span class="bi"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z"/><path d="M9.5 12l2 2 3.5-4"/></svg></span>
+        <span><span class="bt">Integrity assured</span><span class="bd">Certified personnel</span></span>
+      </div>
+    </div>
+  </div>
+<div class="sv-slide alt" data-acc="var(--teal)" data-soft="rgba(55,214,192,.10)" id="slide-construction">
+    <div class="sv-bg" style="background:linear-gradient(135deg,rgba(4,34,52,.95),rgba(6,50,68,.88))"></div>
+    <div class="sv-media sp-reveal s2">
+      <div class="sp-frame"><img src="https://images.unsplash.com/photo-1758902064778-c5c68c7e8f82?fm=jpg&fit=crop&auto=format&q=76&w=1000" alt="Subsea construction equipment on an offshore vessel deck" loading="lazy"></div>
+      <div class="sp-badge" style="right:-16px;bottom:-18px">
+        <span class="bi"><svg viewBox="0 0 24 24"><path d="M3 18a9 9 0 0 1 18 0"/><path d="M2 18h20"/><path d="M9 8V5h6v3"/></svg></span>
+        <span><span class="bt">Built &amp; maintained</span><span class="bd">Proficiency-certified crews</span></span>
+      </div>
+    </div><div class="sp-copy">
+      <div class="sp-eyebrow sp-reveal"><span class="bar"></span><span class="lbl">Service spotlight</span><span class="idx">04 / 05</span></div>
+      <h2 class="sp-h2 sp-reveal s2">Subsea Construction<br>&amp; Maintenance</h2>
+      <p class="sp-lead sp-reveal s2">A full range of subsea construction and maintenance from proficiency-certified personnel — component change-outs, mid-water arch inspection, FMD surveys, FPSO hull and turret inspection, and anchor-chain inspection that keep subsea infrastructure built and maintained to the highest standards.</p>
+      <ul class="sp-list sp-reveal s3"><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Subsea component change-out</li><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Mid-water arch inspection</li><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Anchor-chain inspection &amp; measurement</li><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Platform &amp; pipeline inspection</li></ul>
+      <a href="#contact" class="btn btn-ghost sp-reveal s3">Learn more
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div>
+  </div>
+<div class="sv-slide" data-acc="var(--violet)" data-soft="rgba(143,160,255,.10)" id="slide-port">
+    <div class="sv-bg" style="background:linear-gradient(135deg,rgba(4,28,52,.95),rgba(6,36,64,.88))"></div>
+    <div class="sp-copy">
+      <div class="sp-eyebrow sp-reveal"><span class="bar"></span><span class="lbl">Service spotlight</span><span class="idx">05 / 05</span></div>
+      <h2 class="sp-h2 sp-reveal s2">Port Management<br>Services</h2>
+      <p class="sp-lead sp-reveal s2">Safe, efficient maritime operations — Vessel Traffic Services, piloting with tugs and AHTS vessels, buoy and navigational-system installation and maintenance, bathymetric surveys, and dredging, all backed by marine safety solutions that keep every activity fully compliant.</p>
+      <ul class="sp-list sp-reveal s3"><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Vessel Traffic Services (VTS)</li><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Piloting with tugs &amp; AHTS</li><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Buoy &amp; navigation systems</li><li><svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>Bathymetric surveys &amp; dredging</li></ul>
+      <a href="#contact" class="btn btn-ghost sp-reveal s3">Learn more
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </div><div class="sv-media sp-reveal s2">
+      <div class="sp-frame"><img src="https://images.unsplash.com/photo-1605676103133-df5f92882cae?fm=jpg&fit=crop&auto=format&q=76&w=1000" alt="A harbour tug under way for port operations" loading="lazy"></div>
+      <div class="sp-badge" style="left:-16px;bottom:-18px">
+        <span class="bi"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M12 7v13"/><path d="M5 12a7 7 0 0 0 14 0"/><path d="M5 12H3m18 0h-2"/></svg></span>
+        <span><span class="bt">Safe port operations</span><span class="bd">VTS · piloting · dredging</span></span>
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="sv-dots" id="sv-dots"><button class="sv-dotactive" data-i="0" aria-label="Service 1"></button>
+<button class="sv-dot" data-i="1" aria-label="Service 2"></button>
+<button class="sv-dot" data-i="2" aria-label="Service 3"></button>
+<button class="sv-dot" data-i="3" aria-label="Service 4"></button>
+<button class="sv-dot" data-i="4" aria-label="Service 5"></button></div>
 </section>
 
 <section class="sec why" id="why">
@@ -571,7 +600,6 @@
   </div>
 </section>
 
-
 <footer class="foot">
   <div class="foot-inner">
     <div>
@@ -616,72 +644,88 @@
 </footer>
 
 <script>
-  (function(){
-    var b=document.getElementById('burger'),n=document.getElementById('nav');
-    b.addEventListener('click',function(){var o=n.classList.toggle('open');
-      b.setAttribute('aria-expanded',o?'true':'false');b.setAttribute('aria-label',o?'Close menu':'Open menu');});
-    n.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){n.classList.remove('open');b.setAttribute('aria-expanded','false');});});
-    if('IntersectionObserver' in window){
-      var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.16});
-      document.querySelectorAll('.sp-reveal').forEach(function(el){io.observe(el);});
-    } else {
-      document.querySelectorAll('.sp-reveal').forEach(function(el){el.classList.add('in');});
-    }
-
-    // sticky bar: solid background after scrolling
-    var bar=document.getElementById('topbar');
-    var onScroll=function(){bar.classList.toggle('scrolled',window.scrollY>40);};
-    onScroll();window.addEventListener('scroll',onScroll,{passive:true});
-
-    // scroll-spy: highlight the nav link for the section in view
-    var spyMap={services:'#services',marine:'#services',integrity:'#services',construction:'#services',port:'#services',
-      about:'#about',why:'#why',clients:'#clients',csr:'#clients',contact:'#contact'};
-    var links={};
-    document.querySelectorAll('.nav a').forEach(function(a){links[a.getAttribute('href')]=a;});
-    var setActive=function(href){document.querySelectorAll('.nav a').forEach(function(a){a.classList.remove('active');});
-      if(links[href])links[href].classList.add('active');};
-    if('IntersectionObserver' in window){
-      var spy=new IntersectionObserver(function(es){es.forEach(function(e){
-        if(e.isIntersecting){var h=spyMap[e.target.id];if(h)setActive(h);}
-      });},{rootMargin:'-46% 0px -46% 0px',threshold:0});
-      Object.keys(spyMap).forEach(function(id){var s=document.getElementById(id);if(s)spy.observe(s);});
-    }
-
-    // contact form -> real endpoint (progressive enhancement)
-    var form=document.getElementById('contactForm'),fn=document.getElementById('formNote'),sb=document.getElementById('sendBtn');
-    if(form){
-      form.addEventListener('submit',function(e){
-        e.preventDefault();
-        if(form.action.indexOf('YOUR_FORM_ID')>-1){
-          fn.style.color='var(--amber)';
-          fn.textContent='Demo: set your Formspree form ID in the form action to make this live.';
-          return;
-        }
-        fn.style.color='var(--muted)';fn.textContent='Sending…';sb.disabled=true;
-        fetch(form.action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)})
-          .then(function(r){
-            if(r.ok){fn.style.color='var(--teal)';fn.textContent="Thanks — your message has been sent. We'll be in touch.";form.reset();}
-            else{return r.json().then(function(d){throw new Error((d.errors&&d.errors[0]&&d.errors[0].message)||'failed');});}
-          })
-          .catch(function(){fn.style.color='var(--amber)';fn.textContent='Something went wrong — please email info@aurora-es.com.';})
-          .finally(function(){sb.disabled=false;});
-      });
-    }
-
-    // close on Escape
-    document.addEventListener('keydown',function(e){if(e.key==='Escape')closePrivacy();});
-  })();
-
-  // privacy overlay — must be global so onclick= can reach them
-  function openPrivacy(){
-    document.getElementById('privacy-page').classList.add('active');
-    document.body.style.overflow='hidden';
-    window.scrollTo(0,0);
+(function(){
+  var b=document.getElementById('burger'),nav=document.getElementById('nav');
+  b.addEventListener('click',function(){var o=nav.classList.toggle('open');
+    b.setAttribute('aria-expanded',o?'true':'false');b.setAttribute('aria-label',o?'Close menu':'Open menu');});
+  nav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){nav.classList.remove('open');b.setAttribute('aria-expanded','false');});});
+  var topbar=document.getElementById('topbar');
+  function ons(){topbar.classList.toggle('scrolled',window.scrollY>40);}
+  ons();window.addEventListener('scroll',ons,{passive:true});
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.1});
+    document.querySelectorAll('.sp-reveal').forEach(function(el){io.observe(el);});
+  }else{document.querySelectorAll('.sp-reveal').forEach(function(el){el.classList.add('in');});}
+  var navLinks={};
+  document.querySelectorAll('.nav a').forEach(function(a){navLinks[a.getAttribute('href')]=a;});
+  function setActive(h){document.querySelectorAll('.nav a').forEach(function(a){a.classList.remove('active');});if(navLinks[h])navLinks[h].classList.add('active');}
+  var spyMap={services:'#services',about:'#about',why:'#why',clients:'#clients',csr:'#clients',contact:'#contact'};
+  if('IntersectionObserver' in window){
+    var spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){var h=spyMap[e.target.id];if(h)setActive(h);}});},{rootMargin:'-46% 0px -46% 0px',threshold:0});
+    Object.keys(spyMap).forEach(function(id){var s=document.getElementById(id);if(s)spy.observe(s);});
   }
-  function closePrivacy(){
-    document.getElementById('privacy-page').classList.remove('active');
-    document.body.style.overflow='';
+  var form=document.getElementById('contactForm'),fn=document.getElementById('formNote'),sb=document.getElementById('sendBtn');
+  if(form){form.addEventListener('submit',function(e){e.preventDefault();
+    if(form.action.indexOf('YOUR_FORM_ID')>-1){fn.style.color='var(--amber)';fn.textContent='Demo: set your Formspree ID to make this live.';return;}
+    fn.style.color='var(--muted)';fn.textContent='Sending…';sb.disabled=true;
+    fetch(form.action,{method:'POST',headers:{'Accept':'application/json'},body:new FormData(form)})
+      .then(function(r){if(r.ok){fn.style.color='var(--teal)';fn.textContent='Thanks — message sent.';form.reset();}else{return r.json().then(function(d){throw new Error(d.errors&&d.errors[0]&&d.errors[0].message||'failed');});}})
+      .catch(function(){fn.style.color='var(--amber)';fn.textContent='Something went wrong — email info@aurora-es.com.';})
+      .finally(function(){sb.disabled=false;});
+  });}
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')closePrivacy();});
+})();
+
+function openPrivacy(){document.getElementById('privacy-page').classList.add('active');document.body.style.overflow='hidden';window.scrollTo(0,0);}
+function closePrivacy(){document.getElementById('privacy-page').classList.remove('active');document.body.style.overflow='';}
+
+(function(){
+  var slides=Array.from(document.querySelectorAll('.sv-slide'));
+  var dots=Array.from(document.querySelectorAll('.sv-dot'));
+  var fill=document.getElementById('sv-fill');
+  var counter=document.getElementById('sv-counter');
+  var section=document.querySelector('.sv-section');
+  var track=document.getElementById('sv-track');
+  var N=slides.length,cur=0,timer=null,DELAY=5200;
+  var ACCS=["var(--teal)", "var(--violet)", "var(--amber)", "var(--teal)", "var(--violet)"];
+  var SOFTS=["rgba(55,214,192,.10)", "rgba(143,160,255,.10)", "rgba(255,179,92,.10)", "rgba(55,214,192,.10)", "rgba(143,160,255,.10)"];
+
+  function setAccent(i){
+    section.style.setProperty('--sv-acc',ACCS[i]);
+    section.style.setProperty('--sv-soft',SOFTS[i]);
+    dots.forEach(function(d,j){d.classList.toggle('active',j===i);});
+    counter.textContent=(i<9?'0'+(i+1):i+1)+' / 0'+N;
   }
+  function runProg(){fill.style.transition='none';fill.style.width='0%';void fill.offsetWidth;fill.style.transition='width '+DELAY+'ms linear';fill.style.width='100%';}
+  function stopProg(){fill.style.transition='none';fill.style.width='0%';}
+
+  function goTo(next,dir){
+    if(next===cur)return;
+    var ex=dir>0?'out-left':'out-right',en=dir>0?'in-right':'in-left';
+    slides[cur].classList.remove('active');slides[cur].classList.add(ex);
+    slides[next].classList.add(en);void slides[next].offsetWidth;
+    slides[next].classList.remove(en);slides[next].classList.add('active');
+    slides[next].querySelectorAll('.sp-reveal').forEach(function(el){el.classList.remove('in');});
+    setTimeout(function(){slides[next].querySelectorAll('.sp-reveal').forEach(function(el){el.classList.add('in');});},60);
+    var old=cur;setTimeout(function(){slides[old].classList.remove(ex);},680);
+    cur=next;setAccent(cur);
+  }
+  function next(){goTo((cur+1)%N,1);}
+  function prev(){goTo((cur-1+N)%N,-1);}
+  function start(){timer=setInterval(next,DELAY);runProg();}
+  function stop(){clearInterval(timer);stopProg();}
+
+  document.getElementById('sv-next').addEventListener('click',function(){stop();next();start();});
+  document.getElementById('sv-prev').addEventListener('click',function(){stop();prev();start();});
+  dots.forEach(function(d,i){d.addEventListener('click',function(){stop();goTo(i,i>cur?1:-1);start();});});
+  track.addEventListener('mouseenter',stop);
+  track.addEventListener('mouseleave',start);
+  var tx=null;
+  track.addEventListener('touchstart',function(e){tx=e.touches[0].clientX;},{passive:true});
+  track.addEventListener('touchend',function(e){if(tx===null)return;var dx=e.changedTouches[0].clientX-tx;tx=null;if(Math.abs(dx)<40)return;stop();dx<0?next():prev();start();});
+  slides[0].querySelectorAll('.sp-reveal').forEach(function(el){el.classList.add('in');});
+  setAccent(0);start();
+})();
 </script>
 
 <!-- ── PRIVACY POLICY PAGE (single-page overlay) ── -->
@@ -767,5 +811,3 @@
 </div>
 </body>
 </html>
-
-</body>
