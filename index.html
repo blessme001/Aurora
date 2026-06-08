@@ -668,19 +668,20 @@
       });
     }
 
-    // privacy overlay
-    function openPrivacy(){
-      document.getElementById('privacy-page').classList.add('active');
-      document.body.style.overflow='hidden';
-      window.scrollTo(0,0);
-    }
-    function closePrivacy(){
-      document.getElementById('privacy-page').classList.remove('active');
-      document.body.style.overflow='';
-    }
     // close on Escape
     document.addEventListener('keydown',function(e){if(e.key==='Escape')closePrivacy();});
   })();
+
+  // privacy overlay — must be global so onclick= can reach them
+  function openPrivacy(){
+    document.getElementById('privacy-page').classList.add('active');
+    document.body.style.overflow='hidden';
+    window.scrollTo(0,0);
+  }
+  function closePrivacy(){
+    document.getElementById('privacy-page').classList.remove('active');
+    document.body.style.overflow='';
+  }
 </script>
 
 <!-- ── PRIVACY POLICY PAGE (single-page overlay) ── -->
